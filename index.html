@@ -84,7 +84,7 @@
                     currentChannel = { name: name, url: '' };
                 } else if (line.startsWith('http')) {
                     if (currentChannel) {
-                        currentChannel.url = line.endsWith('.m3u8') ? line : line + '.m3u8';
+                        currentChannel.url = line;
                         channels.push(currentChannel);
                         currentChannel = null;
                     }
@@ -116,7 +116,7 @@
             const loadingAnimation = document.querySelector('.loading-animation');
             playerContainer.style.display = 'flex';
             loadingAnimation.style.display = 'block';
-            player.src = url;
+            player.src = url.endsWith('.m3u8') ? url : url + '.m3u8';
             player.play().catch(error => {
                 console.error('Erro ao reproduzir o vídeo:', error);
                 alert('Erro ao reproduzir o vídeo. Tente outro canal.');
